@@ -36,8 +36,6 @@ require_login($course, true, $cm);
 require_capability('mod/videofile:view', $context);
 
 $PAGE->set_pagelayout('incourse');
-
-$url = new moodle_url('/mod/videofile/view.php', array('id' => $id));
 $PAGE->set_url('/mod/videofile/view.php', array('id' => $cm->id));
 
 // Update 'viewed' state if required by completion system.

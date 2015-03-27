@@ -124,75 +124,6 @@ function videofile_delete_instance($id) {
 }
 
 /**
- * Returns a small object with summary information about what a
- * user has done with a given particular instance of this module.
- *
- * Used for user activity reports.
- *
- * @param stdClass $course
- * @param stdClass $user
- * @param stdClass $coursemodule
- * @param stdClass $videofile
- * @return stdClass|null [->time and ->info: short text description]
- */
-function videofile_user_outline($course, $user, $mod, $videofile) {
-    global $DB;
-
-    $logs = $DB->get_records(
-        'log',
-        array('userid' => $user->id,
-              'module' => 'videofile',
-              'action' => 'view',
-              'info' => $videofile->id),
-        'time ASC');
-    if ($logs) {
-        $numviews = count($logs);
-        $lastlog = array_pop($logs);
-
-        $result = new stdClass();
-        $result->time = $lastlog->time;
-        $result->info = get_string('numviews', '', $numviews);
-
-        return $result;
-    }
-    return null;
-}
-
-/**
- * Prints a detailed representation of what a user has done with
- * a given particular instance of this module, for user activity reports.
- *
- * @param stdClass $course The current course record
- * @param stdClass $user The record of the user we are generating report for
- * @param cm_info $mod Course module info
- * @param stdClass $videofile The module instance record
- * @return void Is supposed to echo directly
- */
-function videofile_user_complete($course, $user, $mod, $videofile) {
-    global $DB;
-
-    $logs = $DB->get_records(
-        'log',
-        array('userid' => $user->id,
-              'module' => 'videofile',
-              'action' => 'view',
-              'info' => $videofile->id),
-        'time ASC');
-
-    if ($logs) {
-        $numviews = count($logs);
-        $lastlog = array_pop($logs);
-
-        $strmostrecently = get_string('mostrecently');
-        $strnumviews = get_string('numviews', '', $numviews);
-
-        echo "$strnumviews - $strmostrecently ".userdate($lastlog->time);
-    } else {
-        print_string('neverseen', 'videofile');
-    }
-}
-
-/**
  * Returns all other capabilities used by this module.
  *
  * @return array Array of capability strings
@@ -234,27 +165,6 @@ function videofile_get_coursemodule_info($coursemodule) {
     }
 
     return $result;
-}
-
-/**
- * Return the list of view actions
- *
- * @return array
- *
- * @catgory  code
- *
- * @since   0.0.1
- */
-function videofile_get_view_actions() {
-    return array('view', 'view help');
-}
-
-/**
- * List of update style log actions
- * @return array
- */
-function videofile_get_post_actions() {
-    return array('update', 'add');
 }
 
 /**
