@@ -15,26 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file replaces the legacy STATEMENTS section in db/install.xml,
- * lib.php/modulename_install() post installation hook and partially defaults.php
+ * The mod_videofile instance list viewed event.
  *
  * @package    mod_videofile
- * @copyright  2013 Jonas Nockert <jonasnockert@gmail.com>
+ * @copyright  2015 Skylar Kelty <S.Kelty@kent.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Post installation procedure
- *
- * @see upgrade_plugins_modules()
- */
-function xmldb_videofile_install() {
-}
+namespace mod_videofile\event;
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
- * Post installation recovery procedure
+ * The mod_videofile instance list viewed event class.
  *
- * @see upgrade_plugins_modules()
+ * @package    mod_videofile
+ * @since      Moodle 2.7
+ * @copyright  2015 Skylar Kelty <S.Kelty@kent.ac.uk>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function xmldb_videofile_install_recovery() {
+class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {
+
 }

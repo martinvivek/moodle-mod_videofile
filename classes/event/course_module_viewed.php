@@ -15,16 +15,35 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @see uninstall_plugin()
+ * The mod_videofile course module viewed event.
  *
  * @package    mod_videofile
- * @copyright  2013 Jonas Nockert <jonasnockert@gmail.com>
+ * @copyright  2015 Skylar Kelty <S.Kelty@kent.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace mod_videofile\event;
+
+defined('MOODLE_INTERNAL') || die();
+
 /**
- * Custom uninstallation procedure
+ * The mod_videofile course module viewed event class.
+ *
+ * @package    mod_videofile
+ * @since      Moodle 2.7
+ * @copyright  2015 Skylar Kelty <S.Kelty@kent.ac.uk>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function xmldb_videofile_uninstall() {
-    return true;
+class course_module_viewed extends \core\event\course_module_viewed {
+
+    /**
+     * Init method.
+     *
+     * @return void
+     */
+    protected function init() {
+        $this->data['objecttable'] = 'videofile';
+        $this->data['crud'] = 'r';
+        $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
+    }
 }

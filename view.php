@@ -45,11 +45,15 @@ $completion = new completion_info($course);
 $completion->set_module_viewed($cm);
 
 // Log viewing.
-add_to_log($course->id,
-           'videofile',
-           'view',
-           'view.php?id=' . $cm->id,
-           $videofile->get_instance()->id, $cm->id);
+$instance = $videofile->get_instance();
+$event = \mod_videofile\event\course_module_viewed::create(array(
+    'context' => $context,
+    'objectid' => $instance->id
+));
+$event->add_record_snapshot('course_modules', $cm);
+$event->add_record_snapshot('course', $course);
+$event->add_record_snapshot('videofile', $instance);
+$event->trigger();
 
 $renderer = $PAGE->get_renderer('mod_videofile');
 echo $renderer->video_page($videofile);
