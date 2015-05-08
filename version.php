@@ -27,7 +27,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2015032700;
+$plugin->version  = 2015050800;
 $plugin->requires = 2014110400;
 $plugin->cron     = 0;
 $plugin->component = 'mod_videofile';
