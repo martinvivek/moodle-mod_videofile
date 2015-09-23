@@ -58,11 +58,7 @@ class mod_videofile_mod_form extends moodleform_mod {
                         255,
                         'client');
 
-        if (method_exists($this, 'standard_intro_elements')) {
-            $this->standard_intro_elements();
-        } else {
-            $this->add_intro_editor(false);
-        }
+        $this->standard_intro_elements();
 
         // Video fields.
         $mform->addElement('header',
