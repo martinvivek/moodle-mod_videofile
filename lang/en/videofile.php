@@ -28,6 +28,8 @@ $string['modulename'] = 'Videofile';
 $string['modulenameplural'] = 'Videofiles';
 $string['modulename_help'] = 'Use the videofile module for adding html5 videos with flash fallback (using video.js). This module also allows for multi-language captions.';
 
+$string['search:activity'] = 'Video activities';
+
 $string['videofile:addinstance'] = 'Add a new videofile';
 $string['videofile:view'] = 'View videofile';
 
